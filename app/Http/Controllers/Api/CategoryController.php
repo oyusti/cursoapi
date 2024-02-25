@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use App\Http\Resources\CategoryResource;
 
 class CategoryController extends Controller
 {
@@ -13,8 +14,8 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories = Category::all();
-        return $categories;
+        $categories = Category::included()->filter()->sort()->GetorPaginate();
+        return CategoryResource::collection($categories);
         //return response()->json($category, 200);
     }
 
@@ -35,9 +36,10 @@ class CategoryController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Category $category)
+    public function show($id)
     {
-        return $category;
+        $category = Category::included()->findOrFail($id);
+        return CategoryResource::make($category);
     }
 
     /**
