@@ -38,6 +38,10 @@
                             {{ __('Clientes') }}
                         </x-dropdown-link>
 
+                        <x-dropdown-link :href="route('tokens.index')">
+                            {{ __('Api Tokens') }}
+                        </x-dropdown-link>
+
                         <x-dropdown-link :href="route('profile.edit')">
                             {{ __('Profile') }}
                         </x-dropdown-link>
@@ -91,6 +95,14 @@
                 <!-- Authentication -->
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf
+
+                    <x-responsive-nav-link :href="route('clients.index')">
+                        {{ __('Clientes') }}
+                    </x-responsive-nav-link>
+
+                    <x-responsive-nav-link :href="route('tokens.index')">
+                        {{ __('Api Tokens') }}
+                    </x-responsive-nav-link>
 
                     <x-responsive-nav-link :href="route('logout')"
                             onclick="event.preventDefault();

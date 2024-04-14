@@ -24,5 +24,16 @@ class AuthServiceProvider extends ServiceProvider
     public function boot(): void
     {
         Passport::tokensExpireIn(Carbon::now()->addSecond(60));
+
+        Passport::tokensCan([
+            'create-post' => 'Create a new resource',
+            'read-post' => 'Read a resource',
+            'update-post' => 'Update a resource',
+            'delete-post' => 'Delete a resource',
+        ]);
+
+        Passport::setDefaultScope([
+            'read-post'
+        ]);
     }
 }
